@@ -1,3 +1,0 @@
-services:
-    restfulsubversion.changesetrepository:
-        class: MyHammer\RestfulSubversion\Entity\ChangesetRepository

@@ -4,7 +4,7 @@ namespace MyHammer\RestfulSubversionBundle\Transformer;
 
 use RestfulSubversion\Core\Changeset;
 
-class ChangesetTransformerInterface
+class ChangesetTransformer implements ChangesetTransformerInterface
 {
     /**
      * Transforms a \RestfulSubversion\Core\Changeset into a \MyHammer\RestfulSubversionBundle\Entity\Changeset
