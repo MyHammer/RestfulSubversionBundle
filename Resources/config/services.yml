@@ -1,19 +1,28 @@
 services:    
-    restfulsubversion.repoCacheDb:
+    restfulsubversion_repocache_db:
         class: PDO
         arguments: [%repocache_db%]
         public: false
 
-    restfulsubversion.repoCache:
+    restfulsubversion_repocache:
         class: RestfulSubversion\Core\RepoCache
-        arguments: [@restfulsubversion.repoCacheDb]
+        arguments: [@restfulsubversion_repocache_db]
         public: false
 
-    restfulsubversion.changesetTransformer:
+    restfulsubversion_changeset_transformer:
         class: MyHammer\RestfulSubversionBundle\Transformer\ChangesetTransformer
         public: false
 
-    restfulsubversion.changesetrepository:
+    restfulsubversion_changeset_repository:
         class: MyHammer\RestfulSubversionBundle\Entity\ChangesetRepository
-        arguments: [@restfulsubversion.repoCache, @restfulsubversion.changesetTransformer]
+        arguments: [@restfulsubversion_repocache, @restfulsubversion_changeset_transformer]
+        public: true
+
+    restfulsubversion_repofile_transformer:
+        class: MyHammer\RestfulSubversionBundle\Transformer\RepoFileTransformer
+        public: false
+
+    restfulsubversion_repofile_repository:
+        class: MyHammer\RestfulSubversionBundle\Entity\ChangesetRepository
+        arguments: [@restfulsubversion_repocache, @restfulsubversion_repofile_transformer]
         public: true

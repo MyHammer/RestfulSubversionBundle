@@ -2,7 +2,7 @@
 
 namespace MyHammer\RestfulSubversionBundle\Transformer;
 
-use RestfulSubversion\Core\Changeset;
+use MyHammer\RestfulSubversionBundle\Entity\Changeset;
 
 class ChangesetTransformer implements ChangesetTransformerInterface
 {
@@ -12,20 +12,21 @@ class ChangesetTransformer implements ChangesetTransformerInterface
      * @param \RestfulSubversion\Core\Changeset $changeset
      * @return \MyHammer\RestfulSubversionBundle\Entity\Changeset The transformed Changeset
      */
-    public function transform(Changeset $changeset)
+    public function transform(RestfulSubversion\Core\Changeset $changeset)
     {
-        $transformedChangeset = new Changeset($changeset->getRevision()->getAsString());
+        $transformedChangeset = new Changeset();
+        $transformedChangeset->setRevision($changeset->getRevision()->getAsString());
         $transformedChangeset->setAuthor($changeset->getAuthor());
         $transformedChangeset->setDateTime($changeset->getDateTime());
         $transformedChangeset->setMessage($changeset->getMessage());
         
         $pathOperations = $changeset->getPathOperations();
         foreach ($pathOperations as $pathOperation) {
-            $copyFromPath = NULL;
+            $copyFromPath = null;
             if (key_exists('copyfromPath', $pathOperation)) {
                 $copyFromPath = $pathOperation['copyfromPath']->getAsString();
             }
-            $copyFromRev = NULL;
+            $copyFromRev = null;
             if (key_exists('copyfromPath', $pathOperation)) {
                 $copyFromRev = $pathOperation['copyfromRev']->getAsString();
             }

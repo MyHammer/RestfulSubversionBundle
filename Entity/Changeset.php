@@ -9,15 +9,15 @@ class Changeset
     protected $dateTime;
     protected $message;
     protected $pathOperations;
-    
-    public function __construct($revision)
-    {
-        $this->revision = $revision;
-    }
-    
+        
     public function getRevision()
     {
         return $this->revision;
+    }
+    
+    public function setRevision($revision)
+    {
+        $this->revision = $revision;
     }
     
     public function getAuthor()
